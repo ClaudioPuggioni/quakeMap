@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { LayersControl, MapContainer, TileLayer } from "react-leaflet";
+import { LayersControl, MapContainer, Marker, TileLayer } from "react-leaflet";
 import "../assets/leaflet.css";
 // import { GoogleMutant, GoogleApiLoader } from "react-leaflet-googlemutant";
 // import L from "leaflet";
@@ -43,8 +43,20 @@ export default function Map({ aided, reqAid }) {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {aided.length > 0 ? aided.map((entry) => <Marker position={entry[0]}>{entry[1]}</Marker>) : null}
-          {reqAid.length > 0 ? reqAid.map((entry) => <Marker position={entry[0]}>{entry[1]}</Marker>) : null}
+          {aided.length > 0
+            ? aided.map((entry) => (
+                <Marker position={entry[0]}>
+                  <Popup>{entry[1]}</Popup>
+                </Marker>
+              ))
+            : null}
+          {reqAid.length > 0
+            ? reqAid.map((entry) => (
+                <Marker position={entry[0]}>
+                  <Popup>{entry[1]}</Popup>
+                </Marker>
+              ))
+            : null}
           {/* <TileLayer
           attribution="Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
           url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
