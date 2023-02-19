@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { LayersControl, MapContainer, Marker, TileLayer } from "react-leaflet";
+import { LayersControl, MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "../assets/leaflet.css";
 // import { GoogleMutant, GoogleApiLoader } from "react-leaflet-googlemutant";
 // import L from "leaflet";
