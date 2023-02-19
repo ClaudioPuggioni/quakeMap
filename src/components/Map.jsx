@@ -30,14 +30,22 @@ export default function Map({ aided, reqAid }) {
           {aided.length > 0
             ? aided.map((entry) => (
                 <Marker position={entry[0]} icon={aidedIcon}>
-                  <Popup>{entry[1]}</Popup>
+                  <Popup>
+                    {entry[1]}
+                    <br /> <br />
+                    {`ID: ${entry[2]}`}
+                  </Popup>
                 </Marker>
               ))
             : null}
           {reqAid.length > 0
             ? reqAid.map((entry) => (
                 <Marker position={entry[0]} icon={reqIcon}>
-                  <Popup>{entry[1]}</Popup>
+                  <Popup>
+                    {entry[1]}
+                    <br /> <br />
+                    {`ID: ${entry[2]}`}
+                  </Popup>
                 </Marker>
               ))
             : null}
