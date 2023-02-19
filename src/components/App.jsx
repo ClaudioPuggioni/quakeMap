@@ -9,13 +9,12 @@ export default function App() {
   const [reqAid, setReqAid] = useState([[[37, 36], "Pending Request: Need shelter and medical supplies for 3000 injured"]]);
 
   useEffect(() => {
-    // socket.emit("meow");
     socket.on("addComplete", (location) => {
-      console.log("Location", location);
+      console.log("Location (addComplete)", location);
       setAided([...aided, [[location.longitude, location.latitude], "message"]]);
     });
     socket.on("addRequest", (location) => {
-      console.log("Location", location);
+      console.log("Location (addRequest)", location);
       setReqAid([...aided, [[location.longitude, location.latitude], "message"]]);
     });
     // eslint-disable-next-line
