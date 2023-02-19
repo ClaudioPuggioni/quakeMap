@@ -4,7 +4,7 @@ import "../assets/leaflet.css";
 // import { GoogleMutant, GoogleApiLoader } from "react-leaflet-googlemutant";
 // import L from "leaflet";
 
-export default function Map() {
+export default function Map({ aided, reqAid }) {
   // const { BaseLayer } = LayersControl;
   const mapConfig = { center: [36.65, 36.3], zoom: 9, scrollWheelZoom: true, style: { height: "500px" } };
 
@@ -43,6 +43,8 @@ export default function Map() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
+          {aided.length > 0 ? aided.map((entry) => <Marker position={entry[0]}>{entry[1]}</Marker>) : null}
+          {reqAid.length > 0 ? reqAid.map((entry) => <Marker position={entry[0]}>{entry[1]}</Marker>) : null}
           {/* <TileLayer
           attribution="Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
           url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
