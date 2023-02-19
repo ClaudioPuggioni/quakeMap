@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import Map from "./Map";
 import { io } from "socket.io-client";
 // const socket = io.connect("http://127.0.0.1:1111")
-const socket = io.connect("https://quakebot.onrender.com/:10000");
+const socket = io.connect("https://quakebot.onrender.com/");
 
 export default function App() {
   useEffect(() => {
