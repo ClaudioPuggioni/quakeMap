@@ -11,16 +11,16 @@ export default function App() {
   useEffect(() => {
     socket.on("addComplete", ({ location, message, id }) => {
       console.log("Location (addComplete)", location);
-      setAided([...aided, [[location.longitude, location.latitude], message, id]]);
+      setAided([...aided, [[location.latitude, location.longitude], message, id]]);
     });
     socket.on("addRequest", ({ location, message, id }) => {
       console.log("Location (addRequest)", location);
-      setReqAid([...aided, [[location.longitude, location.latitude], message, id]]);
+      setReqAid([...aided, [[location.latitude, location.longitude], message, id]]);
     });
     socket.on("reqFilled", ({ location, message, id }) => {
       console.log("Location (reqFilled)", location);
       if (reqAid.some((request) => request[2] === id)) setAided(reqAid.filter((request) => request[2] !== id));
-      setAided([...aided, [[location.longitude, location.latitude], message, id]]);
+      setAided([...aided, [[location.latitude, location.longitude], message, id]]);
     });
     // eslint-disable-next-line
   }, [socket]);
