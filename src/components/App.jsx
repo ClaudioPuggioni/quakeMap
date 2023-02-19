@@ -9,17 +9,17 @@ export default function App() {
   const [reqAid, setReqAid] = useState([[[37, 36], "Pending Request: Need shelter and medical supplies for 3000 injured", "53u8y2o0"]]);
 
   useEffect(() => {
-    socket.on("addComplete", ({ location, msg }) => {
+    socket.on("addComplete", ({ location, message, id }) => {
       console.log("Location (addComplete)", location);
-      setAided([...aided, [[location.longitude, location.latitude], msg]]);
+      setAided([...aided, [[location.longitude, location.latitude], message, id]]);
     });
-    socket.on("addRequest", ({ location, msg }) => {
+    socket.on("addRequest", ({ location, message }) => {
       console.log("Location (addRequest)", location);
-      setReqAid([...aided, [[location.longitude, location.latitude], msg]]);
+      setReqAid([...aided, [[location.longitude, location.latitude], message, id]]);
     });
-    socket.on("reqFilled", ({ location, msg, ID }) => {
-      if (reqAid.some((request) => request[2] === ID)) setAided(reqAid.filter((request) => request[2] !== ID));
-      setAided([...aided, [[location.longitude, location.latitude], msg]]);
+    socket.on("reqFilled", ({ location, message, id }) => {
+      if (reqAid.some((request) => request[2] === id)) setAided(reqAid.filter((request) => request[2] !== id));
+      setAided([...aided, [[location.longitude, location.latitude], message, id]]);
     });
     // eslint-disable-next-line
   }, [socket]);
