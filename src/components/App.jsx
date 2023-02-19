@@ -18,6 +18,7 @@ export default function App() {
       setReqAid([...aided, [[location.longitude, location.latitude], message, id]]);
     });
     socket.on("reqFilled", ({ location, message, id }) => {
+      console.log("Location (reqFilled)", location);
       if (reqAid.some((request) => request[2] === id)) setAided(reqAid.filter((request) => request[2] !== id));
       setAided([...aided, [[location.longitude, location.latitude], message, id]]);
     });
