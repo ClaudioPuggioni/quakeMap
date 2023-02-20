@@ -1,12 +1,33 @@
 import React, { useEffect, useState } from "react";
 import Map from "./Map";
 import { io } from "socket.io-client";
-// const socket = io.connect("http://127.0.0.1:1111")
-const socket = io.connect("https://quakebot.onrender.com/");
+import axios from "axios";
+const socket = io.connect("http://127.0.0.1:1111");
+// const socket = io.connect("https://quakebot.onrender.com/");
 
 export default function App() {
   const [aided, setAided] = useState([[[36.65, 36.3], "Complete Request: Received NGO food payload", "01424dfk"]]);
   const [reqAid, setReqAid] = useState([[[37, 36], "Pending Request: Need shelter and medical supplies for 3000 injured", "53u8y2o0"]]);
+
+  const loadSave = async function () {
+    // const response = await fetch("https://quakebot.onrender.com/boot");
+    const response = await axios.get("http://127.0.0.1:1111/boot");
+    const data = await response.data;
+    console.log("loadSave received:", data);
+    // setAided(data.aided);
+    // setReqAid(data.reqAid);
+  };
+
+  // const savePin = async function ({}) {
+  //   const response = await axios.post("http://127.0.0.1:1111/addPin", { data: {} });
+  //   const data = await response.data;
+  //   console.log("savePin received:", data);
+  // };
+
+  useEffect(() => {
+    loadSave();
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     socket.on("addComplete", ({ location, message, id }) => {
@@ -24,6 +45,16 @@ export default function App() {
     });
     // eslint-disable-next-line
   }, [socket]);
+
+  // useEffect(() => {
+  //   savePin({});
+  //   // eslint-disable-next-line
+  // }, [aided]);
+
+  // useEffect(() => {
+  //   savePin({});
+  //   // eslint-disable-next-line
+  // }, [reqAid]);
 
   return (
     <div className="">

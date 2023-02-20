@@ -28,8 +28,8 @@ export default function Map({ aided, reqAid }) {
             url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {aided.length > 0
-            ? aided.map((entry) => (
-                <Marker position={entry[0]} icon={aidedIcon}>
+            ? aided.map((entry, idx) => (
+                <Marker position={entry[0]} icon={aidedIcon} key={`aided${idx}`}>
                   <Popup>
                     {entry[1]}
                     <br /> <br />
@@ -39,8 +39,8 @@ export default function Map({ aided, reqAid }) {
               ))
             : null}
           {reqAid.length > 0
-            ? reqAid.map((entry) => (
-                <Marker position={entry[0]} icon={reqIcon}>
+            ? reqAid.map((entry, idx) => (
+                <Marker position={entry[0]} icon={reqIcon} key={`reqAid${idx}`}>
                   <Popup>
                     {entry[1]}
                     <br /> <br />
