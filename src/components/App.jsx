@@ -14,7 +14,7 @@ export default function App() {
       setAided([...aided, [[location.latitude, location.longitude], message, id]]);
     });
     socket.on("addRequest", ({ location, message, id }) => {
-      console.log("Location (addRequest)", location);
+      console.log("Location (addRequest)", location, id, JSON.stringify(id));
       setReqAid([...aided, [[location.latitude, location.longitude], message, id]]);
     });
     socket.on("reqFilled", ({ location, message, id }) => {
