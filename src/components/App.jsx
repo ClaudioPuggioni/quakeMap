@@ -43,6 +43,13 @@ export default function App() {
       if (reqAid.some((request) => request[2] === id)) setAided(reqAid.filter((request) => request[2] !== id));
       setAided([...aided, [[location.latitude, location.longitude], message, id]]);
     });
+    socket.on("pinUpdate", (pin) => {
+      console.log("pin:", pin);
+      if (pin.pinType === "aided") {
+      }
+      if (pin.pinType === "reqAid") {
+      }
+    });
     // eslint-disable-next-line
   }, [socket]);
 
