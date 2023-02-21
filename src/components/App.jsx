@@ -3,14 +3,14 @@ import Map from "./Map";
 import { io } from "socket.io-client";
 import axios from "axios";
 // const socket = io.connect("http://127.0.0.1:1111");
-const socket = io.connect("https://quakebot.onrender.com/");
+const socket = io.connect("https://quakebot-production.up.railway.app/");
 
 export default function App() {
   const [aided, setAided] = useState([[[36.65, 36.3], "Complete Request: Received NGO food payload", "01424dfk"]]);
   const [reqAid, setReqAid] = useState([[[37, 36], "Pending Request: Need shelter and medical supplies for 3000 injured", "53u8y2o0"]]);
 
   const loadSave = async function () {
-    const response = await axios.get("https://quakebot.onrender.com/boot");
+    const response = await axios.get("https://quakebot-production.up.railway.app/boot");
     // const response = await axios.get("http://127.0.0.1:1111/boot");
     const data = await response.data;
     console.log("loadSave received:", data);
