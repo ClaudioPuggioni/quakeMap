@@ -30,18 +30,18 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    socket.on("addComplete", ({ location, message, id }) => {
+    socket.on("addComplete", ({ location, message, identifier }) => {
       console.log("Location (addComplete)", location);
-      setAided([...aided, [[location.latitude, location.longitude], message, id]]);
+      setAided([...aided, [[location.latitude, location.longitude], message, identifier]]);
     });
-    socket.on("addRequest", ({ location, message, id }) => {
-      console.log("Location (addRequest)", location, id, JSON.stringify(id));
-      setReqAid([...aided, [[location.latitude, location.longitude], message, id]]);
+    socket.on("addRequest", ({ location, message, identifier }) => {
+      console.log("Location (addRequest)", location, identifier, JSON.stringify(id));
+      setReqAid([...aided, [[location.latitude, location.longitude], message, identifier]]);
     });
-    socket.on("reqFilled", ({ location, message, id }) => {
+    socket.on("reqFilled", ({ location, message, identifier }) => {
       console.log("Location (reqFilled)", location);
-      if (reqAid.some((request) => request[2] === id)) setAided(reqAid.filter((request) => request[2] !== id));
-      setAided([...aided, [[location.latitude, location.longitude], message, id]]);
+      if (reqAid.some((request) => request[2] === identifier)) setAided(reqAid.filter((request) => request[2] !== identifier));
+      setAided([...aided, [[location.latitude, location.longitude], message, identifier]]);
     });
     socket.on("pinUpdate", (pin) => {
       console.log("pin:", pin);
