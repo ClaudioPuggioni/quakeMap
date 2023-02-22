@@ -73,7 +73,7 @@ export default function App() {
 
       // idxReqAid - reqAid
       console.log("reqAid-pinUpdate:", [...reqAid]);
-      const idxReqAid = reqAid.findIndex((pinElement) => {
+      const idxReqAid = [...reqAid].findIndex((pinElement) => {
         console.log("ping idxReqAid");
         console.log("idxReqAid MAP:", pinElement, pinElement[2], pinElement[2] === identifier);
         return pinElement[2] === identifier;
@@ -82,7 +82,7 @@ export default function App() {
 
       // idxAided - aided
       console.log("aided-pinUpdate:", [...aided]);
-      const idxAided = aided.findIndex((pinElement) => {
+      const idxAided = [...aided].findIndex((pinElement) => {
         console.log("ping idxAided");
         console.log("idxAided MAP:", pinElement, pinElement[2], pinElement[2] === identifier);
         return pinElement[2] === identifier;
