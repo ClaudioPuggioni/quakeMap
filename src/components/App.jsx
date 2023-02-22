@@ -57,7 +57,7 @@ export default function App() {
       if (reqAid.some((request) => request[2] === identifier)) setAided(reqAid.filter((request) => request[2] !== identifier));
       setAided([...aided, [[location.latitude, location.longitude], message, identifier]]);
     });
-    socket.on("pinUpdate", ({ pin, command }) => {
+    socket.on("pinUpdate", (pin) => {
       const { identifier, latitude, longitude, pinType, message } = pin;
       console.log("pin:", pin);
       const toPin = [[latitude, longitude], message, identifier];
@@ -100,6 +100,13 @@ export default function App() {
         } else {
           setReqAid([toPin]);
         }
+      }
+    });
+    socket.on("pinDelete", ({ identifier, pinType }) => {
+      if (pinType === "reqAid") {
+        setReqAid(reqAid.filter((pin) => pin[2] !== identifier));
+      } else if (pinType === "aided") {
+        setAided(aided.filter((pin) => pin[2] !== identifier));
       }
     });
     // eslint-disable-next-line
