@@ -44,6 +44,15 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    console.log("USEEFFECT-REQAID:", reqAid);
+    // eslint-enable-next-line
+  }, [reqAid]);
+  useEffect(() => {
+    console.log("USEEFFECT-AIDED:", aided);
+    // eslint-enable-next-line
+  }, [aided]);
+
+  useEffect(() => {
     socket.on("addRequest", ({ location, message, identifier }) => {
       console.log("Location (addRequest)", location, identifier, JSON.stringify(identifier));
       setReqAid([...aided, [[location.latitude, location.longitude], message, identifier]]);
