@@ -62,17 +62,23 @@ export default function App() {
       console.log("pin:", pin);
       const toPin = [[Number(latitude), Number(longitude)], message, identifier];
 
+      // idxReqAid - reqAid
+      console.log("reqAid-pinUpdate:", reqAid);
       const idxReqAid = reqAid.findIndex((pin) => {
         console.log("ping idxReqAid");
         console.log("idxReqAid MAP:", pin, pin[2], pin[2] === identifier);
         return pin[2] === identifier;
       });
+      console.log("idxReqAid:", idxReqAid);
+
+      // idxAided - aided
+      console.log("aided-pinUpdate:", aided);
       const idxAided = aided.findIndex((pin) => {
         console.log("ping idxAided");
         console.log("idxAided MAP:", pin, pin[2], pin[2] === identifier);
         return pin[2] === identifier;
       });
-
+      console.log("idxAided:", idxAided);
       // Wrong:
       // const foundIdx =
       //   command === "/arrived"
@@ -80,8 +86,6 @@ export default function App() {
       //     : command === "/message"
       //     ? aided.find((pinObj) => pinObj.identifier === identifier)
       //     : -1;
-      console.log("idxReqAid:", idxReqAid);
-      console.log("idxAided:", idxAided);
 
       if (pinType === "aided") {
         if (idxReqAid > -1) setReqAid(reqAid.filter((pin) => pin[2] !== identifier));
