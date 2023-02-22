@@ -14,8 +14,8 @@ export default function App() {
     // const response = await axios.get("http://127.0.0.1:1111/boot");
     const data = await response.data;
     console.log("loadSave received:", data);
-    // setAided(data.aided);
-    // setReqAid(data.reqAid);
+    setAided(data.aided.map(({ longitude, latitude, message, identifier }) => [[latitude, longitude], `Complete Request: ${message}`, identifier]));
+    setReqAid(data.reqAid.map(({ longitude, latitude, message, identifier }) => [[latitude, longitude], `Pending Request: ${message}`, identifier]));
   };
 
   // const savePin = async function ({}) {
