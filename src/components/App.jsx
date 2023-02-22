@@ -57,36 +57,36 @@ export default function App() {
       if (reqAid.some((request) => request[2] === identifier)) setAided(reqAid.filter((request) => request[2] !== identifier));
       setAided([...aided, [[location.latitude, location.longitude], message, identifier]]);
     });
-    socket.on("pinUpdate", (pin) => {
+    socket.on("pinUpdate", ({ identifier, latitude, longitude, pinType, message }) => {
       console.log("pin:", pin);
-      const toPin = [];
-      // if (pin.pinType === "aided") {
-      //   if (aided.length > 0) {
-      //     const foundIdx = aided.find((pinObj) => pinObj.identifier === pin.identifier);
-      //     if (foundIdx > -1) {
-      //       const aidedReference = [...aided];
-      //       aidedReference[foundIdx] = toPin;
-      //       setAided(aidedReference);
-      //     } else {
-      //       setAided([...aided, toPin]);
-      //     }
-      //   } else {
-      //     setAided([toPin]);
-      //   }
-      // } else if (pin.pinType === "reqAid") {
-      //   if (reqAid.length > 0) {
-      //     const foundIdx = reqAid.find((pinObj) => pinObj.identifier === pin.identifier);
-      //     if (foundIdx > -1) {
-      //       const reqAidReference = [...reqAid];
-      //       reqAidReference[foundIdx] = toPin;
-      //       setReqAid(reqAidReference);
-      //     } else {
-      //       setReqAid([...reqAid, toPin]);
-      //     }
-      //   } else {
-      //     setReqAid([toPin]);
-      //   }
-      // }
+      const toPin = [[latitude, longitude], message, identifier];
+      if (pinType === "aided") {
+        if (aided.length > 0) {
+          const foundIdx = aided.find((pinObj) => pinObj.identifier === identifier);
+          if (foundIdx > -1) {
+            const aidedReference = [...aided];
+            aidedReference[foundIdx] = toPin;
+            setAided(aidedReference);
+          } else {
+            setAided([...aided, toPin]);
+          }
+        } else {
+          setAided([toPin]);
+        }
+      } else if (pinType === "reqAid") {
+        if (reqAid.length > 0) {
+          const foundIdx = reqAid.find((pinObj) => pinObj.identifier === pin.identifier);
+          if (foundIdx > -1) {
+            const reqAidReference = [...reqAid];
+            reqAidReference[foundIdx] = toPin;
+            setReqAid(reqAidReference);
+          } else {
+            setReqAid([...reqAid, toPin]);
+          }
+        } else {
+          setReqAid([toPin]);
+        }
+      }
     });
     // eslint-disable-next-line
   }, [socket]);
