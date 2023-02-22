@@ -72,7 +72,7 @@ export default function App() {
       const toPin = [[Number(latitude), Number(longitude)], message, identifier];
 
       // idxReqAid - reqAid
-      console.log("reqAid-pinUpdate:", reqAid);
+      console.log("reqAid-pinUpdate:", [...reqAid]);
       const idxReqAid = reqAid.findIndex((pinElement) => {
         console.log("ping idxReqAid");
         console.log("idxReqAid MAP:", pinElement, pinElement[2], pinElement[2] === identifier);
@@ -81,7 +81,7 @@ export default function App() {
       console.log("idxReqAid:", idxReqAid);
 
       // idxAided - aided
-      console.log("aided-pinUpdate:", aided);
+      console.log("aided-pinUpdate:", [...aided]);
       const idxAided = aided.findIndex((pinElement) => {
         console.log("ping idxAided");
         console.log("idxAided MAP:", pinElement, pinElement[2], pinElement[2] === identifier);
