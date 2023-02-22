@@ -18,14 +18,14 @@ export default function App() {
     console.log("loadSave received:", data);
     setAided(
       data.aided.map(({ longitude, latitude, message, identifier }) => [
-        [latitude, longitude],
+        [Number(latitude), Number(longitude)],
         message ? `Complete Request: ${message}` : "Awaiting message input...",
         identifier,
       ])
     );
     setReqAid(
       data.reqAid.map(({ longitude, latitude, message, identifier }) => [
-        [latitude, longitude],
+        [Number(latitude), Number(longitude)],
         message ? `Pending Request: ${message}` : "Awaiting message input...",
         identifier,
       ])
@@ -46,28 +46,28 @@ export default function App() {
   useEffect(() => {
     socket.on("addComplete", ({ location, message, identifier }) => {
       console.log("Location (addComplete)", location);
-      setAided([...aided, [[location.latitude, location.longitude], message, identifier]]);
+      setAided([...aided, [[Number(location.latitude), Number(location.longitude)], message, identifier]]);
     });
     socket.on("addRequest", ({ location, message, identifier }) => {
       console.log("Location (addRequest)", location, identifier, JSON.stringify(identifier));
-      setReqAid([...aided, [[location.latitude, location.longitude], message, identifier]]);
+      setReqAid([...aided, [[Number(location.latitude), Number(location.longitude)], message, identifier]]);
     });
     socket.on("reqFilled", ({ location, message, identifier }) => {
       console.log("Location (reqFilled)", location);
       if (reqAid.some((request) => request[2] === identifier)) setAided(reqAid.filter((request) => request[2] !== identifier));
-      setAided([...aided, [[location.latitude, location.longitude], message, identifier]]);
+      setAided([...aided, [[Number(location.latitude), Number(location.longitude)], message, identifier]]);
     });
     socket.on("pinUpdate", (pin) => {
       const { identifier, latitude, longitude, pinType, message } = pin;
       console.log("pin:", pin);
-      const toPin = [[latitude, longitude], message, identifier];
+      const toPin = [[Number(latitude), Number(longitude)], message, identifier];
 
       const idxReqAid = reqAid.findIndex((pin) => {
-        console.log(pin, pin[2], pin[2] === identifier);
+        console.log("idxReqAid MAP:", pin, pin[2], pin[2] === identifier);
         return pin[2] === identifier;
       });
       const idxAided = aided.findIndex((pin) => {
-        console.log(pin, pin[2], pin[2] === identifier);
+        console.log("idxAided MAP:", pin, pin[2], pin[2] === identifier);
         return pin[2] === identifier;
       });
 
