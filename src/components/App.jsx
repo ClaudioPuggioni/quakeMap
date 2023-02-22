@@ -62,8 +62,8 @@ export default function App() {
       console.log("pin:", pin);
       const toPin = [[latitude, longitude], message, identifier];
 
-      const idxReqAid = reqAid.findIndex((pinObj) => pinObj.identifier === identifier);
-      const idxAided = aided.findIndex((pinObj) => pinObj.identifier === identifier);
+      const idxReqAid = reqAid.findIndex((pin) => pin[2] === identifier);
+      const idxAided = aided.findIndex((pin) => pin[2] === identifier);
 
       // Wrong:
       // const foundIdx =
@@ -72,10 +72,12 @@ export default function App() {
       //     : command === "/message"
       //     ? aided.find((pinObj) => pinObj.identifier === identifier)
       //     : -1;
+      console.log("idxReqAid:", idxReqAid);
+      console.log("idxAided:", idxAided);
 
       if (pinType === "aided") {
         if (aided.length > 0) {
-          if (idxReqAid > -1) setReqAid(reqAid.filter((pinObj) => pinObj.identifier !== identifier));
+          if (idxReqAid > -1) setReqAid(reqAid.filter((pin) => pin[2] !== identifier));
           if (idxAided > -1) {
             const aidedReference = [...aided];
             aidedReference[idxAided] = toPin;
