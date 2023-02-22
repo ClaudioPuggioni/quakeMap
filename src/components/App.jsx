@@ -6,8 +6,10 @@ import axios from "axios";
 const socket = io.connect("https://quakebot-production.up.railway.app/");
 
 export default function App() {
-  const [aided, setAided] = useState([[[36.65, 36.3], "Complete Request: Received NGO food payload", "01424dfk"]]);
-  const [reqAid, setReqAid] = useState([[[37, 36], "Pending Request: Need shelter and medical supplies for 3000 injured", "53u8y2o0"]]);
+  // const [aided, setAided] = useState([[[36.65, 36.3], "Complete Request: Received NGO food payload", "01424dfk"]]);
+  // const [reqAid, setReqAid] = useState([[[37, 36], "Pending Request: Need shelter and medical supplies for 3000 injured", "53u8y2o0"]]);
+  const [aided, setAided] = useState([]);
+  const [reqAid, setReqAid] = useState([]);
 
   const loadSave = async function () {
     const response = await axios({ url: "https://quakebot-production.up.railway.app/boot", method: "GET" });
@@ -57,10 +59,34 @@ export default function App() {
     });
     socket.on("pinUpdate", (pin) => {
       console.log("pin:", pin);
-      if (pin.pinType === "aided") {
-      }
-      if (pin.pinType === "reqAid") {
-      }
+      const toPin = [];
+      // if (pin.pinType === "aided") {
+      //   if (aided.length > 0) {
+      //     const foundIdx = aided.find((pinObj) => pinObj.identifier === pin.identifier);
+      //     if (foundIdx > -1) {
+      //       const aidedReference = [...aided];
+      //       aidedReference[foundIdx] = toPin;
+      //       setAided(aidedReference);
+      //     } else {
+      //       setAided([...aided, toPin]);
+      //     }
+      //   } else {
+      //     setAided([toPin]);
+      //   }
+      // } else if (pin.pinType === "reqAid") {
+      //   if (reqAid.length > 0) {
+      //     const foundIdx = reqAid.find((pinObj) => pinObj.identifier === pin.identifier);
+      //     if (foundIdx > -1) {
+      //       const reqAidReference = [...reqAid];
+      //       reqAidReference[foundIdx] = toPin;
+      //       setReqAid(reqAidReference);
+      //     } else {
+      //       setReqAid([...reqAid, toPin]);
+      //     }
+      //   } else {
+      //     setReqAid([toPin]);
+      //   }
+      // }
     });
     // eslint-disable-next-line
   }, [socket]);
