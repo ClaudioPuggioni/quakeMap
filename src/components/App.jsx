@@ -62,8 +62,8 @@ export default function App() {
       console.log("pin:", pin);
       const toPin = [[latitude, longitude], message, identifier];
 
-      const idxReqAid = reqAid.find((pinObj) => pinObj.identifier === identifier);
-      const idxAided = aided.find((pinObj) => pinObj.identifier === identifier);
+      const idxReqAid = reqAid.findIndex((pinObj) => pinObj.identifier === identifier);
+      const idxAided = aided.findIndex((pinObj) => pinObj.identifier === identifier);
 
       // Wrong:
       // const foundIdx =
