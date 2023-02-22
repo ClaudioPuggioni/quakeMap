@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Map from "./Map";
 import { io } from "socket.io-client";
 import axios from "axios";
@@ -10,6 +10,9 @@ export default function App() {
   // const [reqAid, setReqAid] = useState([[[37, 36], "Pending Request: Need shelter and medical supplies for 3000 injured", "53u8y2o0"]]);
   const [aided, setAided] = useState([]);
   const [reqAid, setReqAid] = useState([]);
+
+  const aidedRef = useRef([]);
+  const reqAidRef = useRef([]);
 
   const loadSave = async function () {
     const response = await axios({ url: "https://quakebot-production.up.railway.app/boot", method: "GET" });
@@ -45,10 +48,12 @@ export default function App() {
 
   useEffect(() => {
     console.log("USEEFFECT-REQAID:", reqAid);
+    reqAidRef.current = reqAid;
     // eslint-enable-next-line
   }, [reqAid]);
   useEffect(() => {
     console.log("USEEFFECT-AIDED:", aided);
+    aidedRef.current = aided;
     // eslint-enable-next-line
   }, [aided]);
 
@@ -72,8 +77,8 @@ export default function App() {
       const toPin = [[Number(latitude), Number(longitude)], message, identifier];
 
       // idxReqAid - reqAid
-      console.log("reqAid-pinUpdate:", [...reqAid]);
-      const idxReqAid = [...reqAid].findIndex((pinElement) => {
+      console.log("reqAid-pinUpdate:", [...reqAidRef.current]);
+      const idxReqAid = [...reqAidRef.current].findIndex((pinElement) => {
         console.log("ping idxReqAid");
         console.log("idxReqAid MAP:", pinElement, pinElement[2], pinElement[2] === identifier);
         return pinElement[2] === identifier;
@@ -81,8 +86,8 @@ export default function App() {
       console.log("idxReqAid:", idxReqAid);
 
       // idxAided - aided
-      console.log("aided-pinUpdate:", [...aided]);
-      const idxAided = [...aided].findIndex((pinElement) => {
+      console.log("aided-pinUpdate:", [...aidedRef.current]);
+      const idxAided = [...aidedRef.current].findIndex((pinElement) => {
         console.log("ping idxAided");
         console.log("idxAided MAP:", pinElement, pinElement[2], pinElement[2] === identifier);
         return pinElement[2] === identifier;
