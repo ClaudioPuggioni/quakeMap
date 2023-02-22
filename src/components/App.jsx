@@ -44,19 +44,19 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    socket.on("addComplete", ({ location, message, identifier }) => {
-      console.log("Location (addComplete)", location);
-      setAided([...aided, [[location.latitude, location.longitude], message, identifier]]);
-    });
     socket.on("addRequest", ({ location, message, identifier }) => {
       console.log("Location (addRequest)", location, identifier, JSON.stringify(identifier));
       setReqAid([...aided, [[location.latitude, location.longitude], message, identifier]]);
     });
-    socket.on("reqFilled", ({ location, message, identifier }) => {
-      console.log("Location (reqFilled)", location);
-      if (reqAid.some((request) => request[2] === identifier)) setAided(reqAid.filter((request) => request[2] !== identifier));
-      setAided([...aided, [[location.latitude, location.longitude], message, identifier]]);
+
+    socket.on("pinDelete", ({ identifier, pinType }) => {
+      if (pinType === "reqAid") {
+        setReqAid(reqAid.filter((pin) => pin[2] !== identifier));
+      } else if (pinType === "aided") {
+        setAided(aided.filter((pin) => pin[2] !== identifier));
+      }
     });
+
     socket.on("pinUpdate", (pin) => {
       const { identifier, latitude, longitude, pinType, message } = pin;
       console.log("pin:", pin);
@@ -100,13 +100,7 @@ export default function App() {
         }
       }
     });
-    socket.on("pinDelete", ({ identifier, pinType }) => {
-      if (pinType === "reqAid") {
-        setReqAid(reqAid.filter((pin) => pin[2] !== identifier));
-      } else if (pinType === "aided") {
-        setAided(aided.filter((pin) => pin[2] !== identifier));
-      }
-    });
+
     // eslint-disable-next-line
   }, [socket]);
 
