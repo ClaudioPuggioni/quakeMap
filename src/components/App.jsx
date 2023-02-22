@@ -57,15 +57,28 @@ export default function App() {
       if (reqAid.some((request) => request[2] === identifier)) setAided(reqAid.filter((request) => request[2] !== identifier));
       setAided([...aided, [[location.latitude, location.longitude], message, identifier]]);
     });
-    socket.on("pinUpdate", ({ identifier, latitude, longitude, pinType, message }) => {
+    socket.on("pinUpdate", ({ pin, command }) => {
+      const { identifier, latitude, longitude, pinType, message } = pin;
       console.log("pin:", pin);
       const toPin = [[latitude, longitude], message, identifier];
+
+      const idxReqAid = reqAid.find((pinObj) => pinObj.identifier === identifier);
+      const idxAided = aided.find((pinObj) => pinObj.identifier === identifier);
+
+      // Wrong:
+      // const foundIdx =
+      //   command === "/arrived"
+      //     ? reqAid.find((pinObj) => pinObj.identifier === identifier)
+      //     : command === "/message"
+      //     ? aided.find((pinObj) => pinObj.identifier === identifier)
+      //     : -1;
+
       if (pinType === "aided") {
         if (aided.length > 0) {
-          const foundIdx = aided.find((pinObj) => pinObj.identifier === identifier);
-          if (foundIdx > -1) {
+          if (idxReqAid > -1) setReqAid(reqAid.filter((pinObj) => pinObj.identifier !== identifier));
+          if (idxAided > -1) {
             const aidedReference = [...aided];
-            aidedReference[foundIdx] = toPin;
+            aidedReference[idxAided] = toPin;
             setAided(aidedReference);
           } else {
             setAided([...aided, toPin]);
@@ -75,10 +88,9 @@ export default function App() {
         }
       } else if (pinType === "reqAid") {
         if (reqAid.length > 0) {
-          const foundIdx = reqAid.find((pinObj) => pinObj.identifier === pin.identifier);
-          if (foundIdx > -1) {
+          if (idxReqAid > -1) {
             const reqAidReference = [...reqAid];
-            reqAidReference[foundIdx] = toPin;
+            reqAidReference[idxReqAid] = toPin;
             setReqAid(reqAidReference);
           } else {
             setReqAid([...reqAid, toPin]);
