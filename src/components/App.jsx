@@ -63,10 +63,12 @@ export default function App() {
       const toPin = [[Number(latitude), Number(longitude)], message, identifier];
 
       const idxReqAid = reqAid.findIndex((pin) => {
+        console.log("ping idxReqAid");
         console.log("idxReqAid MAP:", pin, pin[2], pin[2] === identifier);
         return pin[2] === identifier;
       });
       const idxAided = aided.findIndex((pin) => {
+        console.log("ping idxAided");
         console.log("idxAided MAP:", pin, pin[2], pin[2] === identifier);
         return pin[2] === identifier;
       });
