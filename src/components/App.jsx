@@ -82,29 +82,21 @@ export default function App() {
       console.log("idxAided:", idxAided);
 
       if (pinType === "aided") {
-        if (aided.length > 0) {
-          if (idxReqAid > -1) setReqAid(reqAid.filter((pin) => pin[2] !== identifier));
-          if (idxAided > -1) {
-            const aidedReference = [...aided];
-            aidedReference[idxAided] = toPin;
-            setAided(aidedReference);
-          } else {
-            setAided([...aided, toPin]);
-          }
+        if (idxReqAid > -1) setReqAid(reqAid.filter((pin) => pin[2] !== identifier));
+        if (idxAided > -1) {
+          const aidedReference = [...aided];
+          aidedReference[idxAided] = toPin;
+          setAided(aidedReference);
         } else {
-          setAided([toPin]);
+          setAided([...aided, toPin]);
         }
       } else if (pinType === "reqAid") {
-        if (reqAid.length > 0) {
-          if (idxReqAid > -1) {
-            const reqAidReference = [...reqAid];
-            reqAidReference[idxReqAid] = toPin;
-            setReqAid(reqAidReference);
-          } else {
-            setReqAid([...reqAid, toPin]);
-          }
+        if (idxReqAid > -1) {
+          const reqAidReference = [...reqAid];
+          reqAidReference[idxReqAid] = toPin;
+          setReqAid(reqAidReference);
         } else {
-          setReqAid([toPin]);
+          setReqAid([...reqAid, toPin]);
         }
       }
     });
