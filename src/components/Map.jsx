@@ -14,7 +14,7 @@ export default function Map({ aided, reqAid }) {
   const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
 
   // const { BaseLayer } = LayersControl;
-  const mapConfig = { center: [36.65, 36.3], zoom: 9, scrollWheelZoom: true, style: { height: "500px" } };
+  const mapConfig = { center: [36.65, 36.3], zoom: 9, scrollWheelZoom: true, style: { height: isTabletOrMobile ? "100vh" : "500px" } };
   const reqIcon = L.icon({
     iconUrl: "/assets/icons/reqAid.svg",
     iconSize: [40, 40],
@@ -38,7 +38,7 @@ export default function Map({ aided, reqAid }) {
 
   return (
     <div className="flex flex-col gap-1 w-screen items-center">
-      <div className={`leaflet-container h-[100vh] w-[100%]`}>
+      <div className={`leaflet-container ${isTabletOrMobile ? "h-[100vh] w-[100%]" : "h-[500px] w-[900px]"}`}>
         <MapContainer {...mapConfig}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
