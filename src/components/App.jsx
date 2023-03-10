@@ -58,9 +58,11 @@ export default function App() {
   }, [aided]);
 
   useEffect(() => {
-    socket.on("addRequest", ({ location, message, identifier }) => {
-      console.log("Location (addRequest)", location, identifier, JSON.stringify(identifier));
-      setReqAid([...aided, [[location.latitude, location.longitude], message, identifier]]);
+    // socket.on("addRequest", ({ location, message, identifier }) => {
+    socket.on("addRequest", ({ identifier, longitude, latitude, message, pinType }) => {
+      console.log("Location (addRequest)", longitude, latitude, identifier, identifier);
+      if (pinType === "reqAid") setReqAid([...reqAid, [[latitude, longitude], message, identifier]]);
+      if (pinType === "aided") setAided([...aided, [[latitude, longitude], message, identifier]]);
     });
 
     socket.on("pinDelete", ({ identifier, pinType }) => {
