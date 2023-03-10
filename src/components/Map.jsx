@@ -30,7 +30,7 @@ export default function Map({ aided, reqAid }) {
 
   return (
     <div className="flex flex-col gap-1 w-screen items-center">
-      <div className={`leaflet-container h-[${isMobile ? "100vh" : "500px"}] w-[100%]`}>
+      <div className={`leaflet-container h-[${isTabletOrMobile ? "100vh" : "500px"}] w-[100%]`}>
         <MapContainer {...mapConfig}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
