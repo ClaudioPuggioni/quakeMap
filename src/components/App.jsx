@@ -16,7 +16,8 @@ export default function App() {
   const reqAidRef = useRef([]);
 
   const loadSave = async function () {
-    const response = await axios({ url: "https://quakebot-production.up.railway.app/boot", method: "GET" });
+    // const response = await axios({ url: "https://quakebot-production.up.railway.app/boot", method: "GET" });
+    const response = await axios({ url: "https://terminalbot-production.up.railway.app/boot", method: "GET" });
     // const response = await axios.get("http://127.0.0.1:1111/boot");
     const data = await response.data;
     console.log("loadSave received:", data);
