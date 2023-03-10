@@ -5,13 +5,13 @@ import L from "leaflet";
 import { useMediaQuery } from "react-responsive";
 
 export default function Map({ aided, reqAid }) {
-  const isDesktopOrLaptop = useMediaQuery({
-    query: "(min-width: 1224px)",
-  });
-  const isBigScreen = useMediaQuery({ query: "(min-width: 1824px)" });
+  // const isDesktopOrLaptop = useMediaQuery({
+  //   query: "(min-width: 1224px)",
+  // });
+  // const isBigScreen = useMediaQuery({ query: "(min-width: 1824px)" });
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
-  const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
-  const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
+  // const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
+  // const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
 
   // const { BaseLayer } = LayersControl;
   const mapConfig = { center: [36.65, 36.3], zoom: 9, scrollWheelZoom: true, style: { height: isTabletOrMobile ? "100vh" : "500px" } };
@@ -27,14 +27,6 @@ export default function Map({ aided, reqAid }) {
     iconAnchor: [12, 12],
     popupAnchor: [0, 0],
   });
-
-  useEffect(() => {
-    console.log("isDesktopOrLaptop:", isDesktopOrLaptop);
-    console.log("isBigScreen:", isBigScreen);
-    console.log("isTabletOrMobile:", isTabletOrMobile);
-    console.log("isPortrait:", isPortrait);
-    console.log("isRetina:", isRetina);
-  }, []);
 
   return (
     <div className="flex flex-col gap-1 w-screen items-center">
