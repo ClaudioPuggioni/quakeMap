@@ -2,8 +2,17 @@ import React, { useEffect } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "../assets/leaflet.css";
 import L from "leaflet";
+import { useMediaQuery } from "react-responsive";
 
 export default function Map({ aided, reqAid }) {
+  const isDesktopOrLaptop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  });
+  const isBigScreen = useMediaQuery({ query: "(min-width: 1824px)" });
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
+  const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
+
   // const { BaseLayer } = LayersControl;
   const mapConfig = { center: [36.65, 36.3], zoom: 9, scrollWheelZoom: true, style: { height: "500px" } };
   const reqIcon = L.icon({
@@ -21,7 +30,7 @@ export default function Map({ aided, reqAid }) {
 
   return (
     <div className="flex flex-col gap-1 w-screen items-center">
-      <div className="leaflet-container h-[500px] w-[900px]">
+      <div className={`leaflet-container h-[${isMobile ? "100vh" : "500px"}] w-[100%]`}>
         <MapContainer {...mapConfig}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
