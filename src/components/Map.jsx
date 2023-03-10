@@ -28,6 +28,14 @@ export default function Map({ aided, reqAid }) {
     popupAnchor: [0, 0],
   });
 
+  useEffect(() => {
+    console.log("isDesktopOrLaptop:", isDesktopOrLaptop);
+    console.log("isBigScreen:", isBigScreen);
+    console.log("isTabletOrMobile:", isTabletOrMobile);
+    console.log("isPortrait:", isPortrait);
+    console.log("isRetina:", isRetina);
+  }, []);
+
   return (
     <div className="flex flex-col gap-1 w-screen items-center">
       <div className={`leaflet-container h-[100vh] w-[100%]`}>
