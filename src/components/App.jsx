@@ -3,7 +3,8 @@ import Map from "./Map";
 import { io } from "socket.io-client";
 import axios from "axios";
 // const socket = io.connect("http://127.0.0.1:1111");
-const socket = io.connect("https://quakebot-production.up.railway.app/");
+// const socket = io.connect("https://quakebot-production.up.railway.app/");
+const socket = io.connect("https://terminalbot-production.up.railway.app/");
 
 export default function App() {
   // const [aided, setAided] = useState([[[36.65, 36.3], "Complete Request: Received NGO food payload", "01424dfk"]]);
