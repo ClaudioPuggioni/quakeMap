@@ -10,9 +10,12 @@ const POSITION_CLASSES = {
 export function Language({ position }) {
   const minimap = useMemo(
     () => (
-      <div className="flex px-[5px] h-[32px] w-[79px] justify-between gap-[5px]">
-        <img className="cursor-pointer" src="/assets/icons/turkey.png" alt="Turkey Flag" />
-        <img className="cursor-pointer" src="/assets/icons/united-kingdom.png" alt="United Kingdom Flag" />
+      <div className="flex flex-col">
+        <div className="text-[9px]">Sabitleme Dili / Pin Language:</div>
+        <div className="flex px-[5px] h-[32px] w-[79px] justify-between gap-[5px]">
+          <img className="cursor-pointer" src="/assets/icons/turkey.png" alt="Turkey Flag" />
+          <img className="cursor-pointer" src="/assets/icons/united-kingdom.png" alt="United Kingdom Flag" />
+        </div>
       </div>
     ),
     []
