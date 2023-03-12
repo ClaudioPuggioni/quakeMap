@@ -5,7 +5,7 @@ const POSITION_CLASSES = {
   topright: "leaflet-top leaflet-right",
 };
 
-export function MinimapControl({ position, zoom }) {
+export function Language({ position, zoom }) {
   const parentMap = useMap();
   const mapZoom = zoom || 0;
 

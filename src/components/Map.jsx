@@ -3,6 +3,7 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "../assets/leaflet.css";
 import L from "leaflet";
 import { useMediaQuery } from "react-responsive";
+import { Language } from "./Language";
 
 export default function Map({ aided, reqAid }) {
   // const isDesktopOrLaptop = useMediaQuery({
