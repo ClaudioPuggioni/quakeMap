@@ -86,9 +86,9 @@ export default function App() {
 
     socket.on("pinDelete", ({ identifier, pinType }) => {
       if (pinType === "reqAid") {
-        setReqAid(reqAid.filter((pin) => pin[2] !== identifier));
+        setReqAid(reqAid.filter((pin) => pin[3] !== identifier));
       } else if (pinType === "aided") {
-        setAided(aided.filter((pin) => pin[2] !== identifier));
+        setAided(aided.filter((pin) => pin[3] !== identifier));
       }
     });
 
@@ -101,8 +101,8 @@ export default function App() {
       console.log("reqAid-pinUpdate:", [...reqAidRef.current]);
       const idxReqAid = [...reqAidRef.current].findIndex((pinElement) => {
         console.log("ping idxReqAid");
-        console.log("idxReqAid MAP:", pinElement, pinElement[2], pinElement[2] === identifier);
-        return pinElement[2] === identifier;
+        console.log("idxReqAid MAP:", pinElement, pinElement[3], pinElement[3] === identifier);
+        return pinElement[3] === identifier;
       });
       console.log("idxReqAid:", idxReqAid);
 
@@ -110,8 +110,8 @@ export default function App() {
       console.log("aided-pinUpdate:", [...aidedRef.current]);
       const idxAided = [...aidedRef.current].findIndex((pinElement) => {
         console.log("ping idxAided");
-        console.log("idxAided MAP:", pinElement, pinElement[2], pinElement[2] === identifier);
-        return pinElement[2] === identifier;
+        console.log("idxAided MAP:", pinElement, pinElement[3], pinElement[3] === identifier);
+        return pinElement[3] === identifier;
       });
       console.log("idxAided:", idxAided);
       // Wrong:
@@ -123,7 +123,7 @@ export default function App() {
       //     : -1;
 
       if (pinType === "aided") {
-        if (idxReqAid > -1) setReqAid(reqAid.filter((pin) => pin[2] !== identifier));
+        if (idxReqAid > -1) setReqAid(reqAid.filter((pin) => pin[3] !== identifier));
         if (idxAided > -1) {
           const aidedReference = [...aided];
           aidedReference[idxAided] = toPin;
