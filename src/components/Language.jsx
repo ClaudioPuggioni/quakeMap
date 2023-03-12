@@ -7,26 +7,10 @@ const POSITION_CLASSES = {
   topright: "leaflet-top leaflet-right",
 };
 
-export function Language({ position, zoom }) {
-  const mapZoom = zoom || 0;
-
-  // Memoize the minimap so it's not affected by position changes
+export function Language({ position }) {
   const minimap = useMemo(
     () => (
-      //   <MapContainer
-      //     style={{ height: 80, width: 80 }}
-      //     center={parentMap.getCenter()}
-      //     zoom={mapZoom}
-      //     dragging={false}
-      //     doubleClickZoom={false}
-      //     scrollWheelZoom={false}
-      //     attributionControl={false}
-      //     zoomControl={false}
-      //   >
-      //     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      //     <MinimapBounds parentMap={parentMap} zoom={mapZoom} />
-      //   </MapContainer>
-      <div className="flex h-[32px] w-[69px] justify-between gap-[5px]">
+      <div className="flex px-[5px] h-[32px] w-[79px] justify-between gap-[5px]">
         <img className="cursor-pointer" src="/assets/icons/turkey.png" alt="Turkey Flag" />
         <img className="cursor-pointer" src="/assets/icons/united-kingdom.png" alt="United Kingdom Flag" />
       </div>

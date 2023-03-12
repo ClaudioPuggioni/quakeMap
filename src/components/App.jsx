@@ -11,12 +11,12 @@ export default function App() {
   // const [reqAid, setReqAid] = useState([[[37, 36], "Pending Request: Need shelter and medical supplies for 3000 injured", "53u8y2o0"]]);
   const [aided, setAided] = useState([]);
   const [reqAid, setReqAid] = useState([]);
+  const [language, setLanguage] = useState("tr");
 
   const aidedRef = useRef([]);
   const reqAidRef = useRef([]);
 
   const loadSave = async function () {
-    // const response = await axios({ url: "https://quakebot-production.up.railway.app/boot", method: "GET" });
     const response = await axios({ url: "https://terminalbot-production.up.railway.app/boot", method: "GET" });
     // const response = await axios.get("http://127.0.0.1:1111/boot");
     const data = await response.data;
