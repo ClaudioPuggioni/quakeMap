@@ -9,14 +9,15 @@ const POSITION_CLASSES = {
 
 export function Language({ position, language, setLanguage }) {
   const handleSelect = function (selected) {
-    if (selected !== language) setLanguage(selected);
+    console.log(selected);
+    setLanguage(selected);
   };
 
   const minimap = useMemo(
     () => (
       <div className="flex flex-col">
-        <div className="text-[9px] font-black">{language === "tr" ? "Sabitleme Dili" : language === "en" ? "Pin Language" : "ERROR"}:</div>
-        <div className="flex px-[5px] h-[32px] w-[79px] justify-between gap-[5px]">
+        <div className="text-[9px] text-black">{language === "tr" ? "Sabitleme Dili" : language === "en" ? "Pin Language" : "ERROR"}:</div>
+        <div className="flex px-[5px] max-h-[36px] w-[79px] justify-between gap-[5px]">
           <img
             className={`cursor-pointer ${language === "tr" ? "outline outline-orange-500" : ""}`}
             onClick={() => handleSelect("tr")}
