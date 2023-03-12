@@ -17,7 +17,7 @@ export function Language({ position, language, setLanguage }) {
     () => (
       <div className="flex flex-col justify-center items-center p-1">
         <div className="text-[9px] text-black">{language === "tr" ? "Sabitleme Dili" : language === "en" ? "Pin Language" : "ERROR"}:</div>
-        <div className="flex px-[5px] w-[79px] justify-between gap-[5px]">
+        <div className="flex px-[5px] pt-0 w-[79px] justify-between gap-[5px]">
           <img
             className={`cursor-pointer ${language === "tr" ? "outline outline-orange-500 outline-offset-[1px]" : ""}`}
             onClick={() => handleSelect("tr")}
