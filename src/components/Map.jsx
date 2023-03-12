@@ -64,9 +64,9 @@ export default function Map({ aided, reqAid, language, handleSelect }) {
             ? reqAid.map((entry, idx) => (
                 <Marker position={entry[0]} icon={reqIcon} key={`reqAid${idx}`}>
                   <Popup>
-                    {`\n${language === "tr" ? "Tamamlanan İstek" : language === "en" ? "Completed Request" : "ERROR"}: ${
-                      amntTable[language][entry[1]]
-                    } ${entry[2]} ${language === "tr" ? "TEDARİK EDİLEN" : language === "en" ? "PROVIDED" : "ERROR"}.`}
+                    {`\n${language === "tr" ? "Bekleyen İstek" : language === "en" ? "Pending Request" : "ERROR"}: ${amntTable[language][entry[1]]} ${
+                      entry[2]
+                    } ${language === "tr" ? "TALEP EDİLEN" : language === "en" ? "REQUESTED" : "ERROR"}.`}
                     <br /> <br />
                     {`ID: ${entry[3]}`}
                   </Popup>
