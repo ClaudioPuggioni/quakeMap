@@ -7,14 +7,28 @@ const POSITION_CLASSES = {
   topright: "leaflet-top leaflet-right",
 };
 
-export function Language({ position }) {
+export function Language({ position, language, setLanguage }) {
+  const handleSelect = function (selected) {
+    if (selected !== language) setLanguage(selected);
+  };
+
   const minimap = useMemo(
     () => (
       <div className="flex flex-col">
         <div className="text-[9px]">Sabitleme Dili / Pin Language:</div>
         <div className="flex px-[5px] h-[32px] w-[79px] justify-between gap-[5px]">
-          <img className="cursor-pointer" src="/assets/icons/turkey.png" alt="Turkey Flag" />
-          <img className="cursor-pointer" src="/assets/icons/united-kingdom.png" alt="United Kingdom Flag" />
+          <img
+            className={`cursor-pointer ${language === "tr" ? "outline outline-orange-500" : ""}`}
+            onClick={() => handleSelect("tr")}
+            src="/assets/icons/turkey.png"
+            alt="Turkey Flag"
+          />
+          <img
+            className={`cursor-pointer ${language === "en" ? "outline outline-orange-500" : ""}`}
+            onClick={() => handleSelect("en")}
+            src="/assets/icons/united-kingdom.png"
+            alt="United Kingdom Flag"
+          />
         </div>
       </div>
     ),

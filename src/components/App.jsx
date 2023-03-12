@@ -3,8 +3,12 @@ import Map from "./Map";
 import { io } from "socket.io-client";
 import axios from "axios";
 // const socket = io.connect("http://127.0.0.1:1111");
-// const socket = io.connect("https://quakebot-production.up.railway.app/");
 const socket = io.connect("https://terminalbot-production.up.railway.app/");
+
+const amntTable = {
+  en: { 1: "Less than 100", 2: "From 100 to 1'000", 3: "From 1'000 to 10'000", 4: "From 10'000 to 100'000", 5: "More than 100'000" },
+  tr: { 1: "100'den az", 2: "100'den 1'000'e", 3: "1'000'den 10'000'e", 4: "10'000'den 100'000'e", 5: "100'000'den fazla" },
+};
 
 export default function App() {
   // const [aided, setAided] = useState([[[36.65, 36.3], "Complete Request: Received NGO food payload", "01424dfk"]]);
@@ -22,16 +26,25 @@ export default function App() {
     const data = await response.data;
     console.log("loadSave received:", data);
     setAided(
-      data.aided.map(({ longitude, latitude, message, identifier }) => [
+      data.aided.map(({ longitude, latitude, amount, aidType, identifier }) => [
         [Number(latitude), Number(longitude)],
-        message ? `Complete Request: ${message}` : "Awaiting message input...",
+        amount && aidType
+          ? `\n${language === "tr" ? "Tamamlanan İstek" : language === "en" ? "Completed Request" : "ERROR"}: ${
+              amntTable[language][amount]
+            } ${aidType} ${language === "tr" ? "TEDARİK EDİLEN" : language === "en" ? "PROVIDED" : "ERROR"}.`
+          : "ERROR",
         identifier,
       ])
     );
     setReqAid(
-      data.reqAid.map(({ longitude, latitude, message, identifier }) => [
+      data.reqAid.map(({ longitude, latitude, amount, aidType, identifier }) => [
         [Number(latitude), Number(longitude)],
         message ? `Pending Request: ${message}` : "Awaiting message input...",
+        amount && aidType
+          ? `\n${language === "tr" ? "Bekleyen İstek" : language === "en" ? "Pending Request" : "ERROR"}: ${amntTable[language][amount]} ${aidType} ${
+              language === "tr" ? "TALEP EDİLEN" : language === "en" ? "REQUESTED" : "ERROR"
+            }.`
+          : "ERROR",
         identifier,
       ])
     );
@@ -140,7 +153,7 @@ export default function App() {
 
   return (
     <div className="">
-      <Map aided={aided} reqAid={reqAid} />
+      <Map aided={aided} reqAid={reqAid} language={language} setLanguage={setLanguage} />
     </div>
   );
 }
