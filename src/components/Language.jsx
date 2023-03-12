@@ -15,7 +15,7 @@ export function Language({ position, language, setLanguage }) {
 
   const minimap = useMemo(
     () => (
-      <div className="flex flex-col items-center p-1">
+      <div className="flex flex-col justify-center items-center p-1">
         <div className="text-[9px] text-black">{language === "tr" ? "Sabitleme Dili" : language === "en" ? "Pin Language" : "ERROR"}:</div>
         <div className="flex px-[5px] w-[79px] justify-between gap-[5px]">
           <img
