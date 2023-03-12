@@ -5,7 +5,7 @@ import L from "leaflet";
 import { useMediaQuery } from "react-responsive";
 import { Language } from "./Language";
 
-export default function Map({ aided, reqAid, language, setLanguage }) {
+export default function Map({ aided, reqAid, language, handleSelect }) {
   // const isDesktopOrLaptop = useMediaQuery({
   //   query: "(min-width: 1224px)",
   // });
@@ -59,7 +59,7 @@ export default function Map({ aided, reqAid, language, setLanguage }) {
                 </Marker>
               ))
             : null}
-          <Language position="topright" language={language} setLanguage={setLanguage} />
+          <Language position="topright" language={language} handleSelect={handleSelect} />
         </MapContainer>
       </div>
     </div>

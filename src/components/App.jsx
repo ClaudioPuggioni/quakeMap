@@ -20,6 +20,11 @@ export default function App() {
   const aidedRef = useRef([]);
   const reqAidRef = useRef([]);
 
+  const handleSelect = function (selected) {
+    console.log(selected);
+    setLanguage(selected);
+  };
+
   const loadSave = async function () {
     const response = await axios({ url: "https://terminalbot-production.up.railway.app/boot", method: "GET" });
     // const response = await axios.get("http://127.0.0.1:1111/boot");
@@ -153,7 +158,7 @@ export default function App() {
 
   return (
     <div className="">
-      <Map aided={aided} reqAid={reqAid} language={language} setLanguage={setLanguage} />
+      <Map aided={aided} reqAid={reqAid} language={language} handleSelect={handleSelect} />
     </div>
   );
 }

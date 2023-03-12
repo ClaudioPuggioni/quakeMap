@@ -7,12 +7,7 @@ const POSITION_CLASSES = {
   topright: "leaflet-top leaflet-right",
 };
 
-export function Language({ position, language, setLanguage }) {
-  const handleSelect = function (selected) {
-    console.log(selected);
-    setLanguage(selected);
-  };
-
+export function Language({ position, language, handleSelect }) {
   const minimap = useMemo(
     () => (
       <div className="flex flex-col justify-center items-center pb-1 gap-1">
