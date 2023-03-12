@@ -10,6 +10,27 @@ const amntTable = {
   tr: { 1: "100'den az", 2: "100'den 1'000'e", 3: "1'000'den 10'000'e", 4: "10'000'den 100'000'e", 5: "100'000'den fazla" },
 };
 
+const aidTable = {
+  en: {
+    1: "Financial Aid",
+    2: "Food Aid",
+    3: "Medicine",
+    4: "Accommodation",
+    5: "Auxiliary Staff",
+    6: "Health Care Professionals",
+    7: "Tools / Machines",
+  },
+  tr: {
+    1: "Maddi Yardım",
+    2: "Gıda Yardımı",
+    3: "İlaç",
+    4: "Konaklama",
+    5: "Yardımcı Personel",
+    6: "Sağlık Meslek Mensupları",
+    7: "Alet / Makineler",
+  },
+};
+
 export default function Map({ aided, reqAid, language, handleSelect }) {
   // const isDesktopOrLaptop = useMediaQuery({
   //   query: "(min-width: 1224px)",
@@ -53,7 +74,7 @@ export default function Map({ aided, reqAid, language, handleSelect }) {
                   <Popup>
                     {`\n${language === "tr" ? "Tamamlanan İstek" : language === "en" ? "Completed Request" : "ERROR"}: ${
                       amntTable[language][entry[1]]
-                    } ${entry[2]} ${language === "tr" ? "TEDARİK EDİLEN" : language === "en" ? "PROVIDED" : "ERROR"}.`}
+                    } ${aidTable[language][entry[2]]} ${language === "tr" ? "TEDARİK EDİLEN" : language === "en" ? "PROVIDED" : "ERROR"}.`}
                     <br /> <br />
                     {`ID: ${entry[3]}`}
                   </Popup>
@@ -65,7 +86,7 @@ export default function Map({ aided, reqAid, language, handleSelect }) {
                 <Marker position={entry[0]} icon={reqIcon} key={`reqAid${idx}`}>
                   <Popup>
                     {`\n${language === "tr" ? "Bekleyen İstek" : language === "en" ? "Pending Request" : "ERROR"}: ${amntTable[language][entry[1]]} ${
-                      entry[2]
+                      aidTable[language][entry[2]]
                     } ${language === "tr" ? "TALEP EDİLEN" : language === "en" ? "REQUESTED" : "ERROR"}.`}
                     <br /> <br />
                     {`ID: ${entry[3]}`}
