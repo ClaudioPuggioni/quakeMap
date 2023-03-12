@@ -15,7 +15,7 @@ export function Language({ position, language, setLanguage }) {
   const minimap = useMemo(
     () => (
       <div className="flex flex-col">
-        <div className="text-[9px]">{language === "tr" ? "Sabitleme Dili" : language === "en" ? "Pin Language" : "ERROR"}:</div>
+        <div className="text-[9px] font-black">{language === "tr" ? "Sabitleme Dili" : language === "en" ? "Pin Language" : "ERROR"}:</div>
         <div className="flex px-[5px] h-[32px] w-[79px] justify-between gap-[5px]">
           <img
             className={`cursor-pointer ${language === "tr" ? "outline outline-orange-500" : ""}`}
