@@ -22,7 +22,7 @@ export default function Map({ aided, reqAid }) {
     popupAnchor: [0, 0],
   });
   const aidedIcon = L.icon({
-    iconUrl: "/assets/icons/aided.png",
+    iconUrl: "/assets/icons/aided.svg",
     iconSize: [33, 30],
     iconAnchor: [12, 12],
     popupAnchor: [0, 0],
