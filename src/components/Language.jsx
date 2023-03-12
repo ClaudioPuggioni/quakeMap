@@ -19,13 +19,13 @@ export function Language({ position, language, setLanguage }) {
         <div className="text-[9px] text-black">{language === "tr" ? "Sabitleme Dili" : language === "en" ? "Pin Language" : "ERROR"}:</div>
         <div className="flex px-[5px] w-[79px] justify-between gap-[5px]">
           <img
-            className={`cursor-pointer ${language === "tr" ? "outline outline-orange-500 px-[0.1px]" : ""}`}
+            className={`cursor-pointer ${language === "tr" ? "outline outline-orange-500 outline-offset-[1px]" : ""}`}
             onClick={() => handleSelect("tr")}
             src="/assets/icons/turkey.png"
             alt="Turkey Flag"
           />
           <img
-            className={`cursor-pointer ${language === "en" ? "outline outline-orange-500 px-[0.1px]" : ""}`}
+            className={`cursor-pointer ${language === "en" ? "outline outline-orange-500 outline-offset-[1px]" : ""}`}
             onClick={() => handleSelect("en")}
             src="/assets/icons/united-kingdom.png"
             alt="United Kingdom Flag"
