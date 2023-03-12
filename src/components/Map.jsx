@@ -5,6 +5,11 @@ import L from "leaflet";
 import { useMediaQuery } from "react-responsive";
 import { Language } from "./Language";
 
+const amntTable = {
+  en: { 1: "Less than 100", 2: "From 100 to 1'000", 3: "From 1'000 to 10'000", 4: "From 10'000 to 100'000", 5: "More than 100'000" },
+  tr: { 1: "100'den az", 2: "100'den 1'000'e", 3: "1'000'den 10'000'e", 4: "10'000'den 100'000'e", 5: "100'000'den fazla" },
+};
+
 export default function Map({ aided, reqAid, language, handleSelect }) {
   // const isDesktopOrLaptop = useMediaQuery({
   //   query: "(min-width: 1224px)",
@@ -29,6 +34,11 @@ export default function Map({ aided, reqAid, language, handleSelect }) {
     popupAnchor: [0, 0],
   });
 
+  // [0] [Number(latitude), Number(longitude)],
+  // [1] aidAmount,
+  // [2] aidType,
+  // [3] identifier,
+
   return (
     <div className="flex flex-col gap-1 w-screen items-center">
       <div className={`leaflet-container ${isTabletOrMobile ? "h-[100vh] w-[100%]" : "h-[500px] w-[900px]"}`}>
@@ -41,9 +51,11 @@ export default function Map({ aided, reqAid, language, handleSelect }) {
             ? aided.map((entry, idx) => (
                 <Marker position={entry[0]} icon={aidedIcon} key={`aided${idx}`}>
                   <Popup>
-                    {entry[1]}
+                    {`\n${language === "tr" ? "Tamamlanan İstek" : language === "en" ? "Completed Request" : "ERROR"}: ${
+                      amntTable[language][entry[1]]
+                    } ${entry[2]} ${language === "tr" ? "TEDARİK EDİLEN" : language === "en" ? "PROVIDED" : "ERROR"}.`}
                     <br /> <br />
-                    {`ID: ${entry[2]}`}
+                    {`ID: ${entry[3]}`}
                   </Popup>
                 </Marker>
               ))
@@ -52,9 +64,11 @@ export default function Map({ aided, reqAid, language, handleSelect }) {
             ? reqAid.map((entry, idx) => (
                 <Marker position={entry[0]} icon={reqIcon} key={`reqAid${idx}`}>
                   <Popup>
-                    {entry[1]}
+                    {`\n${language === "tr" ? "Tamamlanan İstek" : language === "en" ? "Completed Request" : "ERROR"}: ${
+                      amntTable[language][entry[1]]
+                    } ${entry[2]} ${language === "tr" ? "TEDARİK EDİLEN" : language === "en" ? "PROVIDED" : "ERROR"}.`}
                     <br /> <br />
-                    {`ID: ${entry[2]}`}
+                    {`ID: ${entry[3]}`}
                   </Popup>
                 </Marker>
               ))

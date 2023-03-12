@@ -5,11 +5,6 @@ import axios from "axios";
 // const socket = io.connect("http://127.0.0.1:1111");
 const socket = io.connect("https://terminalbot-production.up.railway.app/");
 
-const amntTable = {
-  en: { 1: "Less than 100", 2: "From 100 to 1'000", 3: "From 1'000 to 10'000", 4: "From 10'000 to 100'000", 5: "More than 100'000" },
-  tr: { 1: "100'den az", 2: "100'den 1'000'e", 3: "1'000'den 10'000'e", 4: "10'000'den 100'000'e", 5: "100'000'den fazla" },
-};
-
 export default function App() {
   // const [aided, setAided] = useState([[[36.65, 36.3], "Complete Request: Received NGO food payload", "01424dfk"]]);
   // const [reqAid, setReqAid] = useState([[[37, 36], "Pending Request: Need shelter and medical supplies for 3000 injured", "53u8y2o0"]]);
@@ -31,26 +26,30 @@ export default function App() {
     const data = await response.data;
     console.log("loadSave received:", data);
     setAided(
-      data.aided.map(({ longitude, latitude, amount, aidType, identifier }) => [
+      data.aided.map(({ longitude, latitude, aidAmount, aidType, identifier }) => [
         [Number(latitude), Number(longitude)],
-        amount && aidType
-          ? `\n${language === "tr" ? "Tamamlanan İstek" : language === "en" ? "Completed Request" : "ERROR"}: ${
-              amntTable[language][amount]
-            } ${aidType} ${language === "tr" ? "TEDARİK EDİLEN" : language === "en" ? "PROVIDED" : "ERROR"}.`
-          : "ERROR",
+        aidAmount,
+        aidType,
         identifier,
+        // aidAmount && aidType
+        //   ? `\n${language === "tr" ? "Tamamlanan İstek" : language === "en" ? "Completed Request" : "ERROR"}: ${
+        //       amntTable[language][aidAmount]
+        //     } ${aidType} ${language === "tr" ? "TEDARİK EDİLEN" : language === "en" ? "PROVIDED" : "ERROR"}.`
+        //   : "ERROR",
       ])
     );
     setReqAid(
-      data.reqAid.map(({ longitude, latitude, amount, aidType, identifier }) => [
+      data.reqAid.map(({ longitude, latitude, aidAmount, aidType, identifier }) => [
         [Number(latitude), Number(longitude)],
-        message ? `Pending Request: ${message}` : "Awaiting message input...",
-        amount && aidType
-          ? `\n${language === "tr" ? "Bekleyen İstek" : language === "en" ? "Pending Request" : "ERROR"}: ${amntTable[language][amount]} ${aidType} ${
-              language === "tr" ? "TALEP EDİLEN" : language === "en" ? "REQUESTED" : "ERROR"
-            }.`
-          : "ERROR",
+        aidAmount,
+        aidType,
         identifier,
+        // message ? `Pending Request: ${message}` : "Awaiting message input...",
+        // aidAmount && aidType
+        //   ? `\n${language === "tr" ? "Bekleyen İstek" : language === "en" ? "Pending Request" : "ERROR"}: ${amntTable[language][aidAmount]} ${aidType} ${
+        //       language === "tr" ? "TALEP EDİLEN" : language === "en" ? "REQUESTED" : "ERROR"
+        //     }.`
+        //   : "ERROR",
       ])
     );
   };
@@ -79,10 +78,10 @@ export default function App() {
 
   useEffect(() => {
     // socket.on("addRequest", ({ location, message, identifier }) => {
-    socket.on("addRequest", ({ identifier, longitude, latitude, message, pinType }) => {
-      console.log("Location (addRequest)", longitude, latitude, identifier, identifier);
-      if (pinType === "reqAid") setReqAid([...reqAid, [[latitude, longitude], message, identifier]]);
-      if (pinType === "aided") setAided([...aided, [[latitude, longitude], message, identifier]]);
+    socket.on("addRequest", ({ identifier, longitude, latitude, aidAmount, aidType, pinType }) => {
+      console.log("Location (addRequest)", longitude, latitude, aidAmount, aidType, identifier);
+      if (pinType === "reqAid") setReqAid([...reqAid, [[Number(latitude), Number(longitude)], aidAmount, aidType, identifier]]);
+      if (pinType === "aided") setAided([...aided, [[Number(latitude), Number(longitude)], aidAmount, aidType, identifier]]);
     });
 
     socket.on("pinDelete", ({ identifier, pinType }) => {
@@ -94,9 +93,9 @@ export default function App() {
     });
 
     socket.on("pinUpdate", (pin) => {
-      const { identifier, latitude, longitude, pinType, message } = pin;
+      const { latitude, longitude, pinType, aidAmount, aidType, identifier } = pin;
       console.log("pin:", pin);
-      const toPin = [[Number(latitude), Number(longitude)], message, identifier];
+      const toPin = [[Number(latitude), Number(longitude)], aidAmount, aidType, identifier];
 
       // idxReqAid - reqAid
       console.log("reqAid-pinUpdate:", [...reqAidRef.current]);
