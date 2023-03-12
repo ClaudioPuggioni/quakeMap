@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 const POSITION_CLASSES = {
   bottomleft: "leaflet-bottom leaflet-left",
@@ -8,6 +8,10 @@ const POSITION_CLASSES = {
 };
 
 export function Language({ position, language, handleSelect }) {
+  useEffect(() => {
+    console.log("language:", language);
+  }, [language]);
+
   const minimap = useMemo(
     () => (
       <div className="flex flex-col justify-center items-center pb-1 gap-1">
