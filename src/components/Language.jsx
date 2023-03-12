@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 const POSITION_CLASSES = {
   bottomleft: "leaflet-bottom leaflet-left",
   bottomright: "leaflet-bottom leaflet-right",
@@ -6,7 +8,6 @@ const POSITION_CLASSES = {
 };
 
 export function Language({ position, zoom }) {
-  const parentMap = useMap();
   const mapZoom = zoom || 0;
 
   // Memoize the minimap so it's not affected by position changes
