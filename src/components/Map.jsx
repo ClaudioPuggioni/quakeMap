@@ -58,6 +58,7 @@ export default function Map({ aided, reqAid }) {
                 </Marker>
               ))
             : null}
+          <Language position="topright" />
         </MapContainer>
       </div>
     </div>
