@@ -26,9 +26,9 @@ export function Language({ position, zoom }) {
       //     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       //     <MinimapBounds parentMap={parentMap} zoom={mapZoom} />
       //   </MapContainer>
-      <div className="flex w-[80px] justify-between">
-        <img src="/assets/icons/turkey.png" alt="Turkey Flag" />
-        <img src="/assets/icons/united-kingdom" alt="United Kingdom Flag" />
+      <div className="flex h-[40px] w-[80px] justify-between">
+        <img className="cursor-pointer" src="/assets/icons/turkey.png" alt="Turkey Flag" />
+        <img className="cursor-pointer" src="/assets/icons/united-kingdom.png" alt="United Kingdom Flag" />
       </div>
     ),
     []
